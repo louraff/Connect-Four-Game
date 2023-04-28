@@ -18,12 +18,26 @@ header {
     letter-spacing: 1vmin;
 }
 h1 {
-color: grey;
-font-size: 3vmin;
-letter-spacing: 0.2vmin;
+    color: grey;
+    font-size: 3vmin;
+    letter-spacing: 0.2vmin;
 }
 #markers {
     display: grid;
-    grid-template-columns: repeat(7, 5vmin); /* use repeat function to tell it to apply the 5vmin spacing to 7 columns*/
+    grid-template-columns: repeat(7, 10vmin); /* use repeat function to tell it to apply the 5vmin spacing to 7 columns*/
     gap: 1vmin;/* the space between columns and rows in a grid*/
+    margin-top: 1.5vmin; /*margin between header and columns*/
+}
+#markers > div { /* the > symbol directs the child selector*/
+    height: 5vmin;
+    border-width: 5vmin; /* MAKE A TRRIANGLE: half the width of grid-template-columns: repeat(7, 10vmin in markers) It has to be half of the actual width*/
+    border-style: solid;
+    border-color: lightgrey transparent transparent; /* Creates triangles!! (left, right, bottom are transparent*/
+/*  MAKE TRIANGLES SMALL UNTIL YOU HOVER OVER THEM */
+    transform: scale(0.7); /* sets them to 70% of original size*/
+}
+#markers > div:hover {
+    transform: scale(0.9);
+    transition: transform 150ms ease-in;/*150 milliseconds. Makes the pop out look more natural*/
+    border-top-color: darkgrey;
 }
