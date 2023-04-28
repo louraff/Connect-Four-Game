@@ -7,7 +7,8 @@ body {
     height: 100vh;
     margin: 0; /*any margin is now gone*/
     font-family: 'Open Sans', sans-serif;  
-}
-header {
-    background-color: blue;
+    display: flex; /* stacks elements vertically, centered on the page */
+    flex-direction: column; /* main axis is up and down */
+    justify-content: center; /* controls the layout for the main axis (columns= vertical)*/
+    align-items: center; /*controls the layout in the opposite directtion (horizontal)*/
 }
