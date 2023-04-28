@@ -12,3 +12,8 @@ body {
     justify-content: center; /* controls the layout for the main axis (columns= vertical)*/
     align-items: center; /*controls the layout in the opposite directtion (horizontal)*/
 }
+header {
+    font-size: 4vmin; /*Whatever the smallest dimension is between width and height, we're taking 5% of that*/
+    color: darkgrey;
+    letter-spacing: 1vmin;
+}
