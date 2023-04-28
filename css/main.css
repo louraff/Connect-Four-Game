@@ -41,3 +41,28 @@ h1 {
     transition: transform 150ms ease-in;/*150 milliseconds. Makes the pop out look more natural*/
     border-top-color: darkgrey;
 }
+#board {
+    display: grid;
+    grid-template-columns: repeat(7, 10vmin); /* specifies column width*/
+    grid-template-rows: repeat(6, 10vmin); /* specifies row height, set as the same vmin as rows columns above to make squares*/
+    gap: 1vmin;
+    margin: -3vmin; /*moves the circles closer to the h1*/
+}
+#board > div {
+    border-radius: 50%; /* turns the squares into circles */
+    border: 0.1vmin solid lightgrey;
+}
+button {
+    margin-top: 6vmin;
+    padding: 2vmin;
+    font-size: 2vmin;
+    border-radius: 4vmin;
+    border: 0.1vmin solid grey;
+    color: grey;
+}
+button:hover {
+    color: rgb(241, 241, 241);
+    background-color: darkgrey;
+}
+
+]
