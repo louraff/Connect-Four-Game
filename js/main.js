@@ -20,6 +20,7 @@ const markerEls = [...document.querySelectorAll('#markers > div')];
 
 	/*----- event listeners -----*/
 document.getElementById('markers').addEventListener('click', handleDrop);
+playAgainBtn.addEventListener('click', init);
 
 	/*----- functions -----*/
 init();
@@ -49,11 +50,66 @@ function handleDrop(evt) {
 // Find the index of the firtst 0 in colArr
 	const rowIdx = colArr.indexOf(0);
 // Update the board state with the current player value (turn state variable)
-	colArr[rowIdx] = turn //col array
+	colArr[rowIdx] = turn; //col array
 //switch player turn
 	turn *= -1;
-
+//check for winner 
+	winner = getWinner(colIdx, rowIdx);
 	render();
+};
+
+// Check for winner and return null if no winner, 1 or -1 if a player has won, or 'T' if tie
+function getWinner(colIdx, rowIdx){
+	return checkVerticalWin(colIdx, rowIdx) ||
+	checkHorizontalWin(colIdx, rowIdx) ||
+	checkDiagonalWinNESW(colIdx, rowIdx) ||
+	checkDiagonalWinNWSE(colIdx, rowIdx);
+
+};
+
+
+function checkDiagonalWinNWSE(colIdx, rowIdx) { // colIdx, rowIdx are where the last move was made
+	const adjCountNW = countAdjacent(colIdx, rowIdx, -1, 1);
+	const adjCountSE = countAdjacent(colIdx, rowIdx, 1, -1);
+	return (adjCountNW + adjCountSE) >= 3 ? board[colIdx][rowIdx] : null;
+};
+
+function checkDiagonalWinNESW(colIdx, rowIdx) { // colIdx, rowIdx are where the last move was made
+	const adjCountNE = countAdjacent(colIdx, rowIdx, 1, 1);
+	const adjCountSW = countAdjacent(colIdx, rowIdx, -1, -1);
+	return (adjCountNE + adjCountSW) >= 3 ? board[colIdx][rowIdx] : null;
+};
+
+
+function checkHorizontalWin(colIdx, rowIdx) { // colIdx, rowIdx are where the last move was made
+	const adjCountLeft = countAdjacent(colIdx, rowIdx, -1, 0);
+	const adjCountRight = countAdjacent(colIdx, rowIdx, 1, 0);
+	return (adjCountLeft + adjCountRight) >= 3 ? board[colIdx][rowIdx] : null;
+};
+
+function checkVerticalWin(colIdx, rowIdx) { // colIdx, rowIdx are where the last move was made
+	return countAdjacent(colIdx, rowIdx, 0, -1) === 3 ? board[colIdx][rowIdx] : null;
+};
+
+function countAdjacent(colIdx, rowIdx, colOffset, rowOffset) {
+//Shortcut variable to the player value
+	const player = board[colIdx][rowIdx];
+//track count of adjacent cells with the same player value
+	let count = 0;
+//initialise the new coordinates
+	colIdx += colOffset;
+	rowIdx += rowOffset;
+	while (
+// Ensure the colIdx is within bounds of the board array
+	board[colIdx] !== undefined && 
+	board[colIdx][rowIdx] !== undefined &&
+	board[colIdx][rowIdx] === player
+) {
+	count++;
+	colIdx += colOffset;
+	rowIdx += rowOffset;
+	}
+	return count;
 };
 
 // This function visualises all state in the DOM
