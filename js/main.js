@@ -16,6 +16,7 @@ let winner; // holds vlues of null (no winner), 1 or -1 means there is winner. '
 	/*----- cached elements  -----*/
 const messageEl = document.querySelector('h1');
 const playAgainBtn = document.querySelector('button');
+const markerEls = document.querySelectorAll('#markers > div')
 	/*----- event listeners -----*/
 
 
@@ -68,7 +69,14 @@ function renderMessage() {
 };
 
 function renderControls() {
+// HIDE PLAY AGAIN BUTTON IF GAME IS IN SESSION
 	// Ternary expression: when we want one of two values returned
 	// <conditional expression> ? <truthy exp> : <falsy exp>
-
+	playAgainBtn.style.visibility = winner ? 'visible' : 'hidden';
+//HIDE OR SHOW ARROWS DEPENDING ON WHETHER COLUMN IS FULL OR NOT
+	// next, iterate over the marker elements to hide/show according to the column being full (no 0s) or not
+	markerEls.forEach(function(markerEl, colIdx){
+		const hideMarker = !board[colIdx].includes(0) || winner; // hideMarker is going to be true or false
+		markerEl.style.visibility = hideMarker ? 'hidden' : 'visible';
+	});
 }
