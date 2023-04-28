@@ -16,9 +16,10 @@ let winner; // holds vlues of null (no winner), 1 or -1 means there is winner. '
 	/*----- cached elements  -----*/
 const messageEl = document.querySelector('h1');
 const playAgainBtn = document.querySelector('button');
-const markerEls = document.querySelectorAll('#markers > div')
-	/*----- event listeners -----*/
+const markerEls = [...document.querySelectorAll('#markers > div')];
 
+	/*----- event listeners -----*/
+document.getElementById('markers').addEventListener('click', handleDrop);
 
 	/*----- functions -----*/
 init();
@@ -39,6 +40,21 @@ function init() {
 	winner = null;
 	render();
 }
+// In response to user interaction, update all impacted state then call render()
+function handleDrop(evt) {
+	const colIdx = markerEls.indexOf(evt.target);// use indexOf to find the element
+//Guards...
+	if (colIdx === -1) return; // Guards against if the space next to an arrow is clicked (-1) 
+	const colArr = board[colIdx]; //Shortcut to the column array
+// Find the index of the firtst 0 in colArr
+	const rowIdx = colArr.indexOf(0);
+// Update the board state with the current player value (turn state variable)
+	colArr[rowIdx] = turn //col array
+//switch player turn
+	turn *= -1;
+
+	render();
+};
 
 // This function visualises all state in the DOM
 function render() {
@@ -80,3 +96,4 @@ function renderControls() {
 		markerEl.style.visibility = hideMarker ? 'hidden' : 'visible';
 	});
 }
+
