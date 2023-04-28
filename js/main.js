@@ -1,4 +1,5 @@
 	/*----- constants -----*/
+	// only const variables have capslock names so we know for sure they are const
 const COLORS = {
 	'0': 'white',
 	'1': 'purple',
@@ -13,8 +14,8 @@ let winner; // holds vlues of null (no winner), 1 or -1 means there is winner. '
 
 
 	/*----- cached elements  -----*/
-
-
+const messageEl = document.querySelector('h1');
+const playAgainBtn = document.querySelector('button');
 	/*----- event listeners -----*/
 
 
@@ -56,9 +57,18 @@ function renderBoard() {
 }
 
 function renderMessage() {
-
-}
+	if(winner === 'T'){
+		messageEl.innerText = "It's a tie!";
+	} else if (winner) {
+		messageEl.innerHTML = `<span style="color: ${COLORS[winner]}">${COLORS[winner].toUpperCase()}</span> wins!`
+	} else {
+		// game is in play in this condition
+		messageEl.innerHTML = `<span style="color: ${COLORS[turn]}">${COLORS[turn].toUpperCase()}</span>'s turn`
+	};
+};
 
 function renderControls() {
+	// Ternary expression: when we want one of two values returned
+	// <conditional expression> ? <truthy exp> : <falsy exp>
 
 }
