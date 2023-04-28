@@ -1,0 +1,13 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    /* vieweport units: vh (viewport height (the actual window height), vw (width), vmin (smallest between vh and vw). The number we use represents a percentage (don't use a percentage though). eg with 50vmin, css will look at the smallest between the two of vh and vw and take 50% of that. Creates a highly scaleable page.*/
+    height: 100vh;
+    margin: 0; /*any margin is now gone*/
+    font-family: 'Open Sans', sans-serif;  
+}
+header {
+    background-color: blue;
+}
