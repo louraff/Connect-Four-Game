@@ -17,3 +17,13 @@ header {
     color: darkgrey;
     letter-spacing: 1vmin;
 }
+h1 {
+color: grey;
+font-size: 3vmin;
+letter-spacing: 0.2vmin;
+}
+#markers {
+    display: grid;
+    grid-template-columns: repeat(7, 5vmin); /* use repeat function to tell it to apply the 5vmin spacing to 7 columns*/
+    gap: 1vmin;/* the space between columns and rows in a grid*/
+}
